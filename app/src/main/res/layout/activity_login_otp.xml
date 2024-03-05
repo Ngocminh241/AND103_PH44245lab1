@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".Login_OTP">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,13 +13,41 @@
         android:paddingTop="50dp"
         android:gravity="center_horizontal"
         android:paddingHorizontal="20dp"
-        android:layout_margin="10dp">
+        android:layout_margin="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:background="@drawable/logo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number:"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
+            <EditText
+                android:id="@+id/edtPhoneNumber"
+                android:paddingLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/khung_input"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnOTP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_button1"
+            android:text="GET OTP"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,90 +58,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username:"
+                android:text="OTP:"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edtUser"
+                android:id="@+id/edtOTP"
                 android:paddingLeft="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/khung_input"
                 app:backgroundTint="@null" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password:"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtPass"
-                android:layout_width="match_parent"
-                android:paddingLeft="15dp"
-                android:layout_height="40dp"
-                android:background="@drawable/khung_input"
-                android:inputType="textPassword"
-                app:backgroundTint="@null" />
-        </LinearLayout>
-
         <Button
-            android:id="@+id/btnlogin"
+            android:id="@+id/btnLoginOTP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/background_button1"
-            android:text="LOGIN"
+            android:text="LOG IN"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
             app:backgroundTint="@null" />
-
-        <TextView
-            android:id="@+id/txtforgot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Forgot password?" />
-
-        <TextView
-            android:id="@+id/txtOTP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Login with OTP" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Don't have an account?  " />
-
-            <TextView
-                android:id="@+id/txtsignup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
