@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "631890158197",
+    "project_id": "and103-lab1-cf119",
+    "storage_bucket": "and103-lab1-cf119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631890158197:android:f0dd46062108e1190cce3c",
+        "android_client_info": {
+          "package_name": "com.example.and103_ph44245lab1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-EhfIrOjtz4FZAiUIV9632JfimGAwRxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
