@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     EditText edtUser, edtPass, edtOTP, edtPhoneNumber;
 
     private FirebaseAuth mAuth;
-//    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
-//    private String mVerificationId;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+    private String mVerificationId;
 
     @Override
     public void onStart() {
@@ -101,13 +102,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         txtOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Login_OTP.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, Login_OTP.class);
+//                startActivity(intent);
+                dialogThem();
             }
         });
 
@@ -140,5 +140,109 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    //
+    private void getOTP(String phoneNumber){
+        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
+                .setPhoneNumber(edtPhoneNumber.getText().toString())
+                .setTimeout(60L, TimeUnit.SECONDS)
+                .setActivity(this)
+                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+//                        edtOTP.setText(phoneAuthCredential.getSmsCode());
+                        signInWithPhoneAuthCredential(phoneAuthCredential);
+                    }
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                        Log.w(TAG, "onVerificationFailed", e);
+
+//                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
+//                            // Invalid request
+//                        } else if (e instanceof FirebaseTooManyRequestsException) {
+//                            // The SMS quota for the project has been exceeded
+//                        } else if (e instanceof FirebaseAuthMissingActivityForRecaptchaException) {
+//                            // reCAPTCHA verification attempted with null Activity
+//                        }
+                        Toast.makeText(MainActivity.this, "gui OTP that bai", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                        super.onCodeSent(verificationId, token);
+                        Log.d(TAG, "onCodeSent:" + verificationId);
+                        mVerificationId = verificationId;
+//                            mResendToken = token;
+                        Toast.makeText(MainActivity.this, "gui OTP  Thanh cong", Toast.LENGTH_SHORT).show();
+                    }
+                    //
+
+                })
+                .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+    }
+
+    private void verifyOTP(String code){
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+        signInWithPhoneAuthCredential(credential);
+    }
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+
+                            FirebaseUser user = task.getResult().getUser();
+                            Toast.makeText(MainActivity.this, "Login Thanh cong", Toast.LENGTH_SHORT).show();
+                            // Update UI
+                            Intent intent = new Intent(MainActivity.this, Home.class);
+                            startActivity(intent);
+                        } else {
+                            // Sign in failed, display a message and update the UI
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                // The verification code entered was invalid
+                            }
+                        }
+                    }
+                });
+    }
+
+    //
+    public void dialogThem() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = ((Activity) MainActivity.this).getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_otp, null);
+        builder.setView(view);
+        Dialog dialog = builder.create();
+        //
+
+        //
+        edtPhoneNumber = view.findViewById(R.id.edtPhoneNumber);
+        edtOTP = view.findViewById(R.id.edtOTP);
+
+        //
+        btnOTP = view.findViewById(R.id.btnOTP);
+        btnLoginOTP = view.findViewById(R.id.btnLoginOTP);
+        //
+        btnOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOTP(edtPhoneNumber.getText().toString());
+            }
+        });
+        btnLoginOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verifyOTP(edtOTP.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        //
+
+        dialog.show();
     }
 }
