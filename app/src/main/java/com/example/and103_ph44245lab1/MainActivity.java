@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         edtUser.setText(getIntent().getStringExtra("username"));
         edtPass.setText(getIntent().getStringExtra("password"));
+
+//        txtOTP.isHovered();
 
         txtsignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,6 +222,8 @@ public class MainActivity extends AppCompatActivity {
         View view = inflater.inflate(R.layout.dialog_otp, null);
         builder.setView(view);
         Dialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         //
 
         //
