@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     //
     private void getOTP(String phoneNumber){
         PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-                .setPhoneNumber(edtPhoneNumber.getText().toString())
+                .setPhoneNumber("+84"+phoneNumber)
                 .setTimeout(60L, TimeUnit.SECONDS)
                 .setActivity(this)
                 .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -237,7 +237,14 @@ public class MainActivity extends AppCompatActivity {
         btnOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getOTP(edtPhoneNumber.getText().toString());
+                String phoneNumber = edtPhoneNumber.getText().toString().trim();
+                if (phoneNumber.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
+                } else if (!phoneNumber.matches("[0-9]+")) {
+                    Toast.makeText(MainActivity.this, "Số điện thoại chỉ được chứa các kí tự số", Toast.LENGTH_SHORT).show();
+                } else {
+                    getOTP(phoneNumber);
+                }
             }
         });
         btnLoginOTP.setOnClickListener(new View.OnClickListener() {
