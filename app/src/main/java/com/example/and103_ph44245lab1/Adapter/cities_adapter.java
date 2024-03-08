@@ -2,14 +2,10 @@ package com.example.and103_ph44245lab1.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,24 +13,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.and103_ph44245lab1.Home;
 import com.example.and103_ph44245lab1.R;
 import com.example.and103_ph44245lab1.cities.City;
-import com.example.and103_ph44245lab1.cities.Regions;
 
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class cities_adapter extends RecyclerView.Adapter<cities_adapter.ViewHolder>{
     Context context;
     ArrayList<City> list;
-
-    ArrayList<Regions> list2;
-
-
 
     private cities_adapter.ViewHolder currentViewHolder;
 

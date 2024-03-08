@@ -8,12 +8,12 @@ public class City {
     private String state;
     private String country;
     private boolean capital;
-    private int population;
+    private long population;
     private List<String> regions;
 
     public City() {}
 
-    public City(String name, String state, String country, boolean capital, int population, List<String> regions) {
+    public City(String name, String state, String country, boolean capital, long population, List<String> regions) {
         this.name = name;
         this.state = state;
         this.country = country;
@@ -54,11 +54,11 @@ public class City {
         this.capital = capital;
     }
 
-    public int getPopulation() {
+    public long getPopulation() {
         return population;
     }
 
-    public void setPopulation(int population) {
+    public void setPopulation(long population) {
         this.population = population;
     }
 
